@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <meta charset="utf-8">
+  <title>Circles</title>
+  <style>
+    html, body, #map-canvas {
+      height: 100%;
+      margin: 0px;
+      padding: 0px
+    }
+  </style>
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+  <script>
+
+
+    var cityCircle;
+
+    function initialize() {
+  // Create the map.
+  var mapOptions = {
+    zoom: 2,
+    center: new google.maps.LatLng(37.774546, -122.433523),
+  };
+
+  var map = new google.maps.Map(document.getElementById('map-canvas'),
+    mapOptions);
+
+
+  var infowindow = new google.maps.InfoWindow({
+    content: '123'
+  });
+  var marker2 = new google.maps.Marker({
+    position: new google.maps.LatLng(60, 120),
+    map: map,
+    icon: {
+      path: google.maps.SymbolPath.CIRCLE,
+       fillOpacity: 0.5,
+       fillColor: 'ff0000',
+       strokeOpacity: 1.0,
+       strokeColor: 'ff0000',
+       strokeWeight: 1.0, 
+      scale: 2 //pixels
+  }
+  });
+
+  {% for tweet in tweets %}
+  var marker = new google.maps.Marker({
+    position: new google.maps.LatLng({{ tweet.longtitude}}, {{ tweet.latitude}}),
+    map: map,
+    icon: {
+      path: google.maps.SymbolPath.CIRCLE,
+       fillOpacity: 0.5,
+       fillColor: 'ff0000',
+       strokeOpacity: 1.0,
+       strokeColor: 'fff000',
+       strokeWeight: 1.0, 
+      scale: 2 //pixels
+  }
+  });
+
+  google.maps.event.addListener(marker,'mouseover',function(event){
+    infowindow.content = "{{ tweet.text}}";
+    marker2.position = event.latLng;
+    infowindow.open(map,marker2);
+  });
+  {% endfor %}
+
+  
+
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+
+</script>
+
+</head>
+<body>
+ <div id="panel">
+  <form>
+    <select name="category">
+      <option value="easter">easter</option>
+      <option value="ferry">South Korean ferry</option>
+      <option value="new york">new york</option>
+      <option value="iran">iran</option>
+      <option value="winter">winter</option>
+      <option value="mh370">mh370</option>
+    </select>
+    <button type="submit">filter</button>
+  </form>
+  <form action="/hotmap">
+    <button type="submit">see heat map</button>
+  </form>
+    <!--   <button onclick="changeRadius()">Change radius</button>
+    <button onclick="changeOpacity()">Change opacity</button>  -->
+  </div>
+  <div id="map-canvas"></div>
+</body>
+</html>

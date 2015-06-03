@@ -1,0 +1,19 @@
+cron:
+- description: happy
+  url: /twitter_api?keyword=happy
+  schedule: every 30 mins
+- description: South_Korean_ferry
+  url: /twitter_api?keyword=ferry
+  schedule: every 30 mins
+- description: mh370
+  url: /twitter_api?keyword=mh370
+  schedule: every 30 mins
+- description: new_york
+  url: /twitter_api?keyword=new%20york
+  schedule: every 30 mins
+- description: winter
+  url: /twitter_api?keyword=winter
+  schedule: every 30 mins
+- description: iran
+  url: /twitter_api?keyword=iran
+  schedule: every 30 mins

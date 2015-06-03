@@ -1,0 +1,15 @@
+indexes:
+
+- kind: Tweet
+  ancestor: yes
+  properties:
+  - name: search_key
+    direction: desc 
+  - name: text
+    direction: desc 
+  - name: latitude
+    direction: desc
+  - name: longtitude
+    direction: desc   
+  - name: addtime
+    direction: desc
